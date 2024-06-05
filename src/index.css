@@ -38,6 +38,16 @@ header ul.nav li {
     transition: opacity 500ms ease;
 }
 
+header ul.nav li .menu-link {
+    text-decoration: none;
+    color: #222222;
+}
+
+header ul.nav li .menu-link.active {
+    text-decoration: none;
+    color: red;
+}
+
 header ul.nav li:hover {
     opacity: 0.5;
 }

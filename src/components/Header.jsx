@@ -1,9 +1,11 @@
 import { useState } from "react"
 import PropTypes from 'prop-types';
 import Order from "./Order";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header({orders, onDelete, plus, minus}) {
   const [cartOpen, setCartOpen] = useState(false)
+  const location = useLocation()
 
   function summary (orders) {
     let sum = 0
@@ -19,9 +21,23 @@ export default function Header({orders, onDelete, plus, minus}) {
             <span className='logo'>House Staff</span>
 
             <ul className="nav">
-              <li>Про нас</li>
-              <li>Контакты</li>
-              <li>Кабинет</li>
+              <li><Link 
+              className={ location.pathname === '/' ? 'menu-link active' : 'menu-link'} 
+              to = '/'
+              >Главная
+              </Link></li>
+
+              <li><Link 
+              className={ location.pathname === '/contacts' ? 'menu-link active' : 'menu-link'} 
+              to = '/contacts'
+              >Контакты
+              </Link></li>
+
+              <li><Link 
+              className={ location.pathname === '/account' ? 'menu-link active' : 'menu-link'} 
+              to = '/account'
+              >Кабинет
+              </Link></li>
             </ul>
 
             <img 
@@ -60,5 +76,5 @@ Header.propTypes = {
   orders: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
   plus: PropTypes.func.isRequired,
-  minus: PropTypes.func.isRequired
+  minus: PropTypes.func.isRequired,
 }

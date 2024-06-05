@@ -1,11 +1,12 @@
-import Header from "./components/Header"
+import MainPage from "./components/MainPage"
+import Header from "./components/header"
 import Footer from "./components/Footer"
-import ItemsSection from "./components/ItemsSection"
 import { items } from "./data"
 import { useState } from "react"
-import Categories from "./components/Categories"
-import ShowFullItem from "./components/ShowFullItem"
-import AgreeToDelete from "./components/AgreeToDelete"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Contacts from "./components/Contacts"
+import Account from "./components/Account"
+
 
 function App() {
   const [orders, setOrders] = useState([])
@@ -92,21 +93,53 @@ function App() {
       el.category.includes(' ' + category + ' ')
     ))
     setCurrentItems(filteredItems)
-  }
+  }  
 
   return (
-    <div className="wrapper">
-      <Header orders = {orders} onDelete = {deleteOrder} plus = {plus} minus = {minus}></Header>
-      <Categories chooseCategory = {chooseCategory}/>
-      <ItemsSection items = {currentItems} onAdd = {addToOrder} onShowItem = {onShowItem}></ItemsSection>
-      {showFullItem && <ShowFullItem item = {fullItem} onAdd = {addToOrder} onShowItem = {onShowItem} closeItem = {closeItem} />}
-      {showDeleteModal && 
-      <AgreeToDelete 
-        handleCancel = {handleCancel}
-        handleDelete = {handleDelete}
-      />}
-      <Footer></Footer>
-    </div>
+    <Router>
+      <div className="wrapper">
+        <Header orders = {orders} onDelete = {deleteOrder} plus = {plus} minus = {minus} ></Header>
+        <Routes> 
+          
+          <Route path="/"
+          element={
+            <MainPage 
+            currentItems = {currentItems}
+            addToOrder = {addToOrder}
+            onShowItem = {onShowItem}
+            closeItem = {closeItem}
+            handleCancel = {handleCancel}
+            handleDelete = {handleDelete}
+            showFullItem = {showFullItem}
+            showDeleteModal = {showDeleteModal}
+            chooseCategory = {chooseCategory} 
+            fullItem = {fullItem}
+            />
+          } />
+
+          <Route path="/contacts" 
+          element = {
+            <Contacts 
+            handleCancel = {handleCancel}
+            handleDelete = {handleDelete}
+            showDeleteModal = {showDeleteModal}
+            />
+          }/>
+
+          <Route path="/account" 
+          element = {
+            <Account 
+            handleCancel = {handleCancel}
+            handleDelete = {handleDelete}
+            showDeleteModal = {showDeleteModal}
+            />
+          }/>
+
+        </Routes> 
+        
+        <Footer></Footer>
+      </div>
+    </Router>
   )
 }
 
