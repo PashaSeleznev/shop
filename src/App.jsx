@@ -2,7 +2,7 @@ import MainPage from "./components/MainPage"
 import Header from "/src/components/Header"
 import Footer from "./components/Footer"
 import { items } from "./data"
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contacts from "./components/Contacts"
 import Account from "./components/Account"
