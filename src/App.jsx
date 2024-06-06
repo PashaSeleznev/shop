@@ -1,5 +1,5 @@
 import MainPage from "./components/MainPage"
-import Header from "./components/header"
+import Header from "/src/components/Header"
 import Footer from "./components/Footer"
 import { items } from "./data"
 import { useState } from "react"
@@ -12,10 +12,12 @@ function App() {
   const [orders, setOrders] = useState([])
   const newItems = items.map(item => ({ ...item, quantity: 0 }));
   const [currentItems, setCurrentItems] = useState(newItems)
+  const [filteredByCategory, setFilteredByCategory] = useState(newItems)
   const [showFullItem, setShowFullItem] = useState(false) 
   const [fullItem, setFullItem] = useState({})
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteItemId, setDeleteItemId] = useState(0)
+  
 
   function addToOrder (item) {
     let isInArray = false
@@ -93,7 +95,16 @@ function App() {
       el.category.includes(' ' + category + ' ')
     ))
     setCurrentItems(filteredItems)
-  }  
+    setFilteredByCategory(filteredItems)
+  }
+  
+  function findItem (text) {
+    const value = text.toLowerCase()
+    const filteredItems = filteredByCategory.filter((el) => (
+      el.title.toLowerCase().includes(value)
+    ))
+    setCurrentItems(filteredItems)
+  }
 
   return (
     <Router>
@@ -113,6 +124,7 @@ function App() {
             showFullItem = {showFullItem}
             showDeleteModal = {showDeleteModal}
             chooseCategory = {chooseCategory} 
+            findItem = {findItem}
             fullItem = {fullItem}
             />
           } />

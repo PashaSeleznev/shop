@@ -3,9 +3,11 @@ import Categories from "./Categories"
 import ShowFullItem from "./ShowFullItem"
 import AgreeToDelete from "./AgreeToDelete"
 import PropTypes from 'prop-types';
+import Search from "./Search";
 
 export default function MainPage ({
-    chooseCategory, 
+    chooseCategory,
+    findItem, 
     currentItems,
     addToOrder,
     onShowItem,
@@ -14,13 +16,14 @@ export default function MainPage ({
     handleCancel,
     handleDelete,
     showFullItem,
-    showDeleteModal
+    showDeleteModal,
 }) {
   
   return (
     <>
       <Categories chooseCategory = {chooseCategory}/>
-      <ItemsSection items = {currentItems} onAdd = {addToOrder} onShowItem = {onShowItem}></ItemsSection>
+      <Search findItem = {findItem}/>
+      <ItemsSection items = {currentItems} onAdd = {addToOrder} onShowItem = {onShowItem} ></ItemsSection>
       {showFullItem && <ShowFullItem item = {fullItem} onAdd = {addToOrder} onShowItem = {onShowItem} closeItem = {closeItem} />}
       {showDeleteModal && 
       <AgreeToDelete 
@@ -33,6 +36,7 @@ export default function MainPage ({
 
 MainPage.propTypes = {
     chooseCategory: PropTypes.func.isRequired,
+    findItem: PropTypes.func.isRequired,
     currentItems: PropTypes.array.isRequired,
     addToOrder: PropTypes.func.isRequired,
     onShowItem: PropTypes.func.isRequired,

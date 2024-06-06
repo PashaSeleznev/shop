@@ -245,6 +245,17 @@ header .presentation::before {
     transform: scale(1.1);
 }
 
+.search-form {
+    width: 40%;
+    float: left;
+    padding: 6px 4px;
+    margin-bottom: 35px;
+    font-size: 16px;
+    border-radius: 4px;
+    border-color: silver;
+    border-style: solid;
+}
+
 main {
     display: flex;
     width: 100%;
