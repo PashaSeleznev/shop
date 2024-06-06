@@ -2,23 +2,55 @@ import ItemsSection from "./ItemsSection"
 import Categories from "./Categories"
 import ShowFullItem from "./ShowFullItem"
 import AgreeToDelete from "./AgreeToDelete"
+import { items } from "../data"
 import PropTypes from 'prop-types';
 import Search from "./Search";
+import { useState, useEffect } from "react";
+import store from "store"
 
 export default function MainPage ({
-    chooseCategory,
-    findItem, 
-    currentItems,
     addToOrder,
-    onShowItem,
-    fullItem,
-    closeItem,
     handleCancel,
     handleDelete,
-    showFullItem,
     showDeleteModal,
 }) {
   
+  const [showFullItem, setShowFullItem] = useState(false) 
+  const [fullItem, setFullItem] = useState({})
+  const newItems = items.map(item => ({ ...item, quantity: 0 }));
+  const storedCurrentItems = store.get('currentItems') || newItems
+  const [currentItems, setCurrentItems] = useState(storedCurrentItems)
+  const [filteredByCategory, setFilteredByCategory] = useState(newItems)
+
+  useEffect(() => {
+    store.set('currentItems', currentItems);
+  }, [currentItems]);
+
+  function onShowItem (item) {
+    setFullItem(item)
+    setShowFullItem(true)
+  }
+
+  function closeItem () {
+    setShowFullItem(!showFullItem)
+  }
+
+  function chooseCategory (category) {
+    const filteredItems = newItems.filter((el) => (
+      el.category.includes(' ' + category + ' ')
+    ))
+    setCurrentItems(filteredItems)
+    setFilteredByCategory(filteredItems)
+  }
+  
+  function findItem (text) {
+    const value = text.toLowerCase()
+    const filteredItems = filteredByCategory.filter((el) => (
+      el.title.toLowerCase().includes(value)
+    ))
+    setCurrentItems(filteredItems)
+  }
+
   return (
     <>
       <Categories chooseCategory = {chooseCategory}/>
@@ -35,15 +67,8 @@ export default function MainPage ({
 }
 
 MainPage.propTypes = {
-    chooseCategory: PropTypes.func.isRequired,
-    findItem: PropTypes.func.isRequired,
-    currentItems: PropTypes.array.isRequired,
     addToOrder: PropTypes.func.isRequired,
-    onShowItem: PropTypes.func.isRequired,
-    fullItem: PropTypes.object.isRequired,
-    closeItem: PropTypes.func.isRequired,
     handleCancel: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
-    showFullItem: PropTypes.bool.isRequired,
     showDeleteModal: PropTypes.bool.isRequired,
 }

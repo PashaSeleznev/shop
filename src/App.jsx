@@ -1,7 +1,6 @@
 import MainPage from "./components/MainPage"
 import Header from "/src/components/Header"
 import Footer from "./components/Footer"
-import { items } from "./data"
 import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contacts from "./components/Contacts"
@@ -12,11 +11,7 @@ import store from "store"
 function App() {
   const storedOrders = store.get('orders') || [];
   const [orders, setOrders] = useState(storedOrders)
-  const newItems = items.map(item => ({ ...item, quantity: 0 }));
-  const [currentItems, setCurrentItems] = useState(newItems)
-  const [filteredByCategory, setFilteredByCategory] = useState(newItems)
-  const [showFullItem, setShowFullItem] = useState(false) 
-  const [fullItem, setFullItem] = useState({})
+ 
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteItemId, setDeleteItemId] = useState(0)
 
@@ -58,15 +53,6 @@ function App() {
     setDeleteItemId(0)
   }
 
-  function onShowItem (item) {
-    setFullItem(item)
-    setShowFullItem(true)
-  }
-
-  function closeItem () {
-    setShowFullItem(!showFullItem)
-  }
-
   function plus (id) {
     const updatedOrders = orders.map (el => {
       if (el.id === id) {
@@ -95,21 +81,6 @@ function App() {
     }
   }
 
-  function chooseCategory (category) {
-    const filteredItems = newItems.filter((el) => (
-      el.category.includes(' ' + category + ' ')
-    ))
-    setCurrentItems(filteredItems)
-    setFilteredByCategory(filteredItems)
-  }
-  
-  function findItem (text) {
-    const value = text.toLowerCase()
-    const filteredItems = filteredByCategory.filter((el) => (
-      el.title.toLowerCase().includes(value)
-    ))
-    setCurrentItems(filteredItems)
-  }
 
   return (
     <Router>
@@ -120,17 +91,10 @@ function App() {
           <Route path="/"
           element={
             <MainPage 
-            currentItems = {currentItems}
             addToOrder = {addToOrder}
-            onShowItem = {onShowItem}
-            closeItem = {closeItem}
             handleCancel = {handleCancel}
             handleDelete = {handleDelete}
-            showFullItem = {showFullItem}
             showDeleteModal = {showDeleteModal}
-            chooseCategory = {chooseCategory} 
-            findItem = {findItem}
-            fullItem = {fullItem}
             />
           } />
 
