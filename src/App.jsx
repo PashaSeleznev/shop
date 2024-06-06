@@ -2,14 +2,16 @@ import MainPage from "./components/MainPage"
 import Header from "/src/components/Header"
 import Footer from "./components/Footer"
 import { items } from "./data"
-import { useState} from "react"
+import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contacts from "./components/Contacts"
 import Account from "./components/Account"
+import store from "store"
 
 
 function App() {
-  const [orders, setOrders] = useState([])
+  const storedOrders = store.get('orders') || [];
+  const [orders, setOrders] = useState(storedOrders)
   const newItems = items.map(item => ({ ...item, quantity: 0 }));
   const [currentItems, setCurrentItems] = useState(newItems)
   const [filteredByCategory, setFilteredByCategory] = useState(newItems)
@@ -17,7 +19,10 @@ function App() {
   const [fullItem, setFullItem] = useState({})
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteItemId, setDeleteItemId] = useState(0)
-  
+
+  useEffect(() => {
+    store.set('orders', orders);
+  }, [orders]); 
 
   function addToOrder (item) {
     let isInArray = false
