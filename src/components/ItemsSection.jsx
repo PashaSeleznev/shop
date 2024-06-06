@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types';
 import Item from './Item';
-
+import { useState, useEffect } from 'react';
 
 export default function ItemsSection({items, onAdd, onShowItem}) {
+  const [empty, setEmpty] = useState(false)
+
+  useEffect(() => {
+    if (items.length === 0) {
+      setEmpty(true);
+    } else {
+      setEmpty(false);
+    }
+  }, [items]);
+
   return (
     <main>
         {items.map(item => ( 
@@ -13,6 +23,8 @@ export default function ItemsSection({items, onAdd, onShowItem}) {
             onShowItem = {onShowItem}
             />
         ))}
+
+        {empty && <p>По вашему запросу ничего не найдено.</p>}
     </main>
   )
 }
@@ -20,5 +32,5 @@ export default function ItemsSection({items, onAdd, onShowItem}) {
 ItemsSection.propTypes = {
     items: PropTypes.array.isRequired,
     onAdd: PropTypes.func.isRequired,
-    onShowItem: PropTypes.func.isRequired
+    onShowItem: PropTypes.func.isRequired,
 }
