@@ -347,11 +347,26 @@ main .add-to-cart:hover,
 
 }
 
+.enter,
+.editing,
+.data {
+    display: flex;
+    justify-content: center;
+}
+
+
+.enter img,
+.editing img,
+.data img {
+    height: 400px;
+    opacity: 0.9;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
     width: 400px;
-    margin: 0 auto;
+    margin-right: 20px;
     border: 2px solid silver;
     border-radius: 10px;
 }
@@ -414,6 +429,12 @@ main .add-to-cart:hover,
     width: 600px;
     display: flex;
     flex-direction: column;
+    border: 2px solid silver;
+    border-radius: 10px;
+}
+
+.account {
+    width: 700px;
 }
 
 .user-edit h2,
@@ -431,6 +452,7 @@ main .add-to-cart:hover,
 .user-edit .user-edit-form,
 .account .person {
     font-size: 20px;
+    margin-left: 25px;
 }
 
 .user-edit .user-edit-form .user-text {
@@ -455,6 +477,8 @@ main .add-to-cart:hover,
     width: 150px;
     cursor: pointer;
     transition: all 500ms ease;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .user-edit .user-edit-form button:hover,
@@ -468,7 +492,7 @@ main .add-to-cart:hover,
     height: 48px;
     margin-bottom: 20px;
     font-weight: 600;
-    margin-left: 5px;
+
 }
 
 footer {

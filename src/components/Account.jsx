@@ -30,7 +30,7 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
         console.error("Ошибка при загрузке данных:", err);
       }
     }
-    // console.log(users)
+    console.log(users)
   };
 
   useEffect(() => {
@@ -123,7 +123,8 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
     <div>
     {(!isEntered && isRegistered) && 
       (
-        <div className="login-form">
+        <div className="enter">
+          <div className="login-form">
           <h2>Вход в аккаунт</h2>
           <section className="em-pass-section">
             <p>Адрес электронной почты:</p>
@@ -146,11 +147,14 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
             {hasEnterError && (<p style={{color: 'red'}} >Неверный адрес электронной почты или пароль!</p>)}
             <p onClick={() => setIsRegistered(false)}>Нет аккаунта? Пройдите регистрацию</p>
           </section>
+          </div>
+          <img src="/src/images/account-img.jpg" alt="" />
         </div>
       )}
       
     {isEntered && isRegistered && isEditing && (
-        <div className="user-edit">
+        <div className="editing">
+          <div className="user-edit">
           <h2>Вы редактируете свое имя!</h2>
           <form className="user-edit-form" onSubmit={handleUpdate}>
             <input className="user-text" type="text" onInput={handleChange} value = {newName}/>
@@ -160,12 +164,15 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
               <li>Пароль: {result.website}</li>
             </ul>
           </form>
+          </div>
+          <img src="/src/images/editing-img.jpg" alt="" />
         </div>
       )
     }
 
     {isEntered && isRegistered && !isEditing && (
-      <div className="account">
+      <div className="data">
+        <div className="account">
         <h2>Добро пожаловать в личный кабинет, {result.name}!</h2>
         <ul className="person">
           <li>
@@ -179,6 +186,8 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
           setIsEntered(false)
           setHasEnterError(false)
         }}>Выйти</button>
+        </div>
+        <img src="/src/images/person-img.jpg" alt="" />
       </div>
     )}
 
