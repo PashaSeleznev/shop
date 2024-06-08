@@ -85,7 +85,11 @@ function App() {
   return (
     <Router>
       <div className="wrapper">
-        <Header orders = {orders} onDelete = {deleteOrder} plus = {plus} minus = {minus} ></Header>
+        <Header 
+        orders = {orders} 
+        onDelete = {deleteOrder} 
+        plus = {plus} 
+        minus = {minus} ></Header>
         <Routes> 
           
           <Route path="/"

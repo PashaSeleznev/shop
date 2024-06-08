@@ -347,6 +347,130 @@ main .add-to-cart:hover,
 
 }
 
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    border: 2px solid silver;
+    border-radius: 10px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-form .em-pass-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .em-pass-section p {
+    float: left;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.login-form .em-pass-section .email-form,
+.login-form .em-pass-section .password-form,
+.login-form .em-pass-section .name-form {
+    font-size: 18px;
+    width: 300px;
+    margin-left: 20px;
+    border: 2px solid silver;
+    border-radius: 3px;
+    padding: 3px 4px;
+    margin-bottom: 20px;
+}
+
+.login-form .button-section button {
+    font-size: 18px;
+    padding: 3px 4px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    border-width: 1px;
+    transition: all 500ms ease;
+}
+
+.login-form .button-section button:hover {
+    transform: scale(1.03);
+    opacity: 0.5;
+}
+
+.login-form .button-section p {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.user-edit, 
+.account {
+    margin: 0 auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-edit h2,
+.account h2 {
+    margin-bottom: 40px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.user-edit ul,
+.account ul {
+    list-style: none;
+}
+
+.user-edit .user-edit-form,
+.account .person {
+    font-size: 20px;
+}
+
+.user-edit .user-edit-form .user-text {
+    font-size: 20px;
+    padding: 3px 4px;
+    border: 2px solid silver;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+.account .name {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.user-edit .user-edit-form button,
+.account button {
+    font-size: 20px;
+    padding: 3px 4px;
+    width: 150px;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.user-edit .user-edit-form button:hover,
+.account button:hover {
+    transform: scale(1.03);
+    opacity: 0.5;
+}
+
+.user-edit .user-edit-form li,
+.account li {
+    height: 48px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
 footer {
     text-align: center;
     margin-top: 100px;
