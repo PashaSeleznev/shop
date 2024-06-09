@@ -192,9 +192,10 @@ export default function Account({showDeleteModal, handleCancel, handleDelete, to
     )}
 
     {!isRegistered && (
-      <div className="login-form">
-      <h2>Регистрация</h2>
-      <section className="em-pass-section">
+      <div className="register">
+        <div className="login-form">
+        <h2>Регистрация</h2>
+        <section className="em-pass-section">
         <p>Ваше имя:</p>
         <input 
           type="text"
@@ -222,6 +223,8 @@ export default function Account({showDeleteModal, handleCancel, handleDelete, to
         {hasRegError && <p style={{color: 'red'}}>К этой почте уже привязан аккаунт!</p>}
         <p onClick={() => setIsRegistered(true)}>У меня уже есть аккаунт.</p>
       </section>
+      </div>
+      <img src="/src/images/register-img.jpg" alt="" />
     </div>
     )}
 

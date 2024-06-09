@@ -375,7 +375,8 @@ main .add-to-cart:hover,
 
 .enter,
 .editing,
-.data {
+.data,
+.register {
     display: flex;
     justify-content: center;
 }
@@ -383,8 +384,9 @@ main .add-to-cart:hover,
 
 .enter img,
 .editing img,
-.data img {
-    height: 400px;
+.data img,
+.register img {
+    height: 450px;
     opacity: 0.9;
 }
 
@@ -414,6 +416,7 @@ main .add-to-cart:hover,
     margin-left: 20px;
     font-size: 20px;
 }
+
 
 .login-form .em-pass-section .email-form,
 .login-form .em-pass-section .password-form,
