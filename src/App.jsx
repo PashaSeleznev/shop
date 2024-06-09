@@ -1,7 +1,7 @@
 import MainPage from "./components/MainPage"
 import Header from "/src/components/Header"
 import Footer from "./components/Footer"
-import { useState, useEffect } from "react"
+import { useState, useEffect} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contacts from "./components/Contacts"
 import Account from "./components/Account"
@@ -11,7 +11,7 @@ import store from "store"
 function App() {
   const storedOrders = store.get('orders') || [];
   const [orders, setOrders] = useState(storedOrders)
- 
+  const [inAccount, setInAccount] = useState(store.get('inAccount') || false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteItemId, setDeleteItemId] = useState(0)
 
@@ -20,7 +20,8 @@ function App() {
   }, [orders]); 
 
   function addToOrder (item) {
-    let isInArray = false
+    if (inAccount) {
+      let isInArray = false
     const updatedOrders = orders.map (el => {
       if (el.id === item.id) {
         isInArray = true
@@ -32,6 +33,9 @@ function App() {
       setOrders([...orders, {...item, quantity: 1}])
     } else {
       setOrders(updatedOrders)
+    }
+    } else {
+      console.log('Не вошел')
     }
   }
 
@@ -81,6 +85,11 @@ function App() {
     }
   }
 
+  function toLogin (status) {
+    setInAccount(status);
+    store.set('inAccount', status);
+  }
+
 
   return (
     <Router>
@@ -89,7 +98,8 @@ function App() {
         orders = {orders} 
         onDelete = {deleteOrder} 
         plus = {plus} 
-        minus = {minus} ></Header>
+        minus = {minus}
+        inAccount = {inAccount} ></Header>
         <Routes> 
           
           <Route path="/"
@@ -99,6 +109,7 @@ function App() {
             handleCancel = {handleCancel}
             handleDelete = {handleDelete}
             showDeleteModal = {showDeleteModal}
+            inAccount = {inAccount}
             />
           } />
 
@@ -117,11 +128,11 @@ function App() {
             handleCancel = {handleCancel}
             handleDelete = {handleDelete}
             showDeleteModal = {showDeleteModal}
+            toLogin = {toLogin}
             />
           }/>
 
         </Routes> 
-        
         <Footer></Footer>
       </div>
     </Router>

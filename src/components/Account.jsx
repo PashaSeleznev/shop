@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from "react";
 import store from "store";
 
-export default function Account({showDeleteModal, handleCancel, handleDelete}) {
+export default function Account({showDeleteModal, handleCancel, handleDelete, toLogin}) {
   const [isEntered, setIsEntered] = useState(store.get('isEntered') || false)
   const [isRegistered, setIsRegistered] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
@@ -30,7 +30,7 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
         console.error("Ошибка при загрузке данных:", err);
       }
     }
-    console.log(users)
+    // console.log(users)
   };
 
   useEffect(() => {
@@ -44,7 +44,8 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
 
   useEffect(() => {
     store.set('isEntered', isEntered)
-  }, [isEntered])
+    toLogin(isEntered)
+  }, [isEntered, toLogin])
 
   function toEnter () {
     const res = {
@@ -59,7 +60,6 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
     } else {
       setHasEnterError(true);
     }
-
     email.current.value = '';
     pass.current.value = '';
   }
@@ -238,5 +238,6 @@ export default function Account({showDeleteModal, handleCancel, handleDelete}) {
 Account.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
+    toLogin: PropTypes.func.isRequired,
     showDeleteModal: PropTypes.bool.isRequired,
 }

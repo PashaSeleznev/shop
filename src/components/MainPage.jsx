@@ -13,6 +13,7 @@ export default function MainPage ({
     handleCancel,
     handleDelete,
     showDeleteModal,
+    inAccount
 }) {
   
   const [showFullItem, setShowFullItem] = useState(false) 
@@ -55,8 +56,8 @@ export default function MainPage ({
     <>
       <Categories chooseCategory = {chooseCategory}/>
       <Search findItem = {findItem}/>
-      <ItemsSection items = {currentItems} onAdd = {addToOrder} onShowItem = {onShowItem} ></ItemsSection>
-      {showFullItem && <ShowFullItem item = {fullItem} onAdd = {addToOrder} onShowItem = {onShowItem} closeItem = {closeItem} />}
+      <ItemsSection items = {currentItems} onAdd = {addToOrder} onShowItem = {onShowItem} inAccount = {inAccount} ></ItemsSection>
+      {showFullItem && <ShowFullItem item = {fullItem} onAdd = {addToOrder} onShowItem = {onShowItem} closeItem = {closeItem} inAccount = {inAccount} />}
       {showDeleteModal && 
       <AgreeToDelete 
         handleCancel = {handleCancel}
@@ -71,4 +72,5 @@ MainPage.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
     showDeleteModal: PropTypes.bool.isRequired,
+    inAccount: PropTypes.bool.isRequired
 }

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 import { useState, useEffect } from 'react';
 
-export default function ItemsSection({items, onAdd, onShowItem}) {
+export default function ItemsSection({items, onAdd, onShowItem, inAccount}) {
   const [empty, setEmpty] = useState(false)
 
   useEffect(() => {
@@ -21,6 +21,7 @@ export default function ItemsSection({items, onAdd, onShowItem}) {
             item = {item}
             onAdd = {onAdd} 
             onShowItem = {onShowItem}
+            inAccount = {inAccount}
             />
         ))}
 
@@ -33,4 +34,5 @@ ItemsSection.propTypes = {
     items: PropTypes.array.isRequired,
     onAdd: PropTypes.func.isRequired,
     onShowItem: PropTypes.func.isRequired,
+    inAccount: PropTypes.bool.isRequired
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Order from "./Order";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Header({orders, onDelete, plus, minus}) {
+export default function Header({orders, onDelete, plus, minus, inAccount}) {
   const [cartOpen, setCartOpen] = useState(false)
   const location = useLocation()
 
@@ -49,7 +49,7 @@ export default function Header({orders, onDelete, plus, minus}) {
 
             {cartOpen && (
               <div className="shop-cart">
-                {orders.length > 0 ?
+                {(orders.length > 0 && inAccount) ?
                 <ul>
                   {orders.map(item => 
                   <Order 
@@ -77,4 +77,5 @@ Header.propTypes = {
   onDelete: PropTypes.func.isRequired,
   plus: PropTypes.func.isRequired,
   minus: PropTypes.func.isRequired,
+  inAccount: PropTypes.bool.isRequired,
 }
