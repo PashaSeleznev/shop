@@ -521,8 +521,24 @@ main .add-to-cart:hover,
     height: 48px;
     margin-bottom: 20px;
     font-weight: 600;
-
 }
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: 0 auto;
+    font-size: 20px;
+    padding: 15px 20px;
+    border: 2px solid silver;
+    border-radius: 10px;
+}
+
+.contacts h2,
+.contacts p {
+    margin-bottom: 20px;
+}
+
 
 footer {
     text-align: center;
